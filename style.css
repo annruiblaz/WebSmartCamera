@@ -1,0 +1,33 @@
+body {
+    font-family: helvetica, arial, sans-serif;
+    margin: 2em;
+    color: #3D3D3D;
+}
+
+h1 {
+    color: #0056b3;
+}
+
+video {
+    display: block;
+}
+
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    
+    &:hover {
+        background-color: #007bff;
+    }
+}
+
+section {
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+}
