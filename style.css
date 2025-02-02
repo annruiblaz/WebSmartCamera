@@ -1,21 +1,35 @@
 body {
+    box-sizing: border-box;
+    margin: 0 15px;
+    width: 100%;
     font-family: helvetica, arial, sans-serif;
-    margin: 2em;
     color: #3D3D3D;
+    overflow-x: hidden;
 }
 
 h1 {
     color: #0056b3;
 }
 
+.camView {
+    display: flex;
+    flex-direction: column;
+}
+
 video {
+    margin: 20px auto;
+    height: auto;
+    max-width: 90%;
     display: block;
+    border: 1px solid #0056b3;
+    border-radius: 20px;
 }
 
 button {
     background-color: #0056b3;
     color: white;
     border: none;
+    margin: 0 auto;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
