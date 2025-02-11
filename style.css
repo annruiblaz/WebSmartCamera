@@ -71,7 +71,7 @@ button {
     font-family:'Audiowide', Courier, monospace;
 
     &:hover {
-        background-color: #0f2514;
+        background-color: #204829;
         color: #80ce87;
     }
 }
@@ -114,11 +114,17 @@ header, footer {
     width: 100%;
 }
 
-.detected-objects {
+#detected-objects {
     padding: 20px;
     margin: 0 auto;
     border: 1px solid black;
     max-width: 610px;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+
+    &.visible {
+        opacity: 1;
+    }
 
     h3 {
         color: #22b455;

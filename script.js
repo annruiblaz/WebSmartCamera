@@ -2,6 +2,8 @@ const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
 const demoSection = document.getElementById('demos');
 const enableWebcamButton = document.getElementById('webcamButton');
+const listObj = document.getElementById("list-detected-objects");
+
 
 //  Creamos la variable que almacenará el modelo
 var model = undefined;
@@ -11,7 +13,8 @@ var objDetected = [];
 cocoSsd.load()
     .then( function (loadedModel) { //  Usamos .then ya q es asincrona (al esperar hasta que cocoSSD esté cargado)
         model = loadedModel;
-        demoSection.classList.remove('invisible'); 
+        demoSection.classList.remove('invisible');
+        document.getElementById('detected-objects').classList.add('visible');
     });
 
 //  Comprueba si el navegador permite el acceso a la camara
@@ -74,12 +77,13 @@ function predictWebcam() {
             //  Para asegurarnos la veracidad de q si es un objeto, 
             // solo utilizaremos los q tengan un 66% o + de probabilidad de ser objeto
             if (predictions[n].score > 0.66) {
+
                 //Comprobamos si ese obj no está ya en la lista para añadirlo
                 if (!objDetected.includes(predictions[n].class)) {
+                    //Lo añadimos al array
                     objDetected.push(predictions[n].class);
-                    console.log('OBJETOS DETECTADOS: ', objDetected);
 
-                    const listObj = document.getElementById("list-detected-objects");
+                    //Pintamos el elemento en la lista
                     const li = document.createElement('li');
                     li.textContent = `${predictions[n].class} - ${Math.round(predictions[n].score * 100)} % de probabilidad`;
                     listObj.appendChild(li);
@@ -123,7 +127,3 @@ function predictWebcam() {
         window.requestAnimationFrame(predictWebcam);
     });
 }
-
-
-// Hace visible la sección demo
-//demosSection.classList.remove('invisible');
