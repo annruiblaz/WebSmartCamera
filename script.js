@@ -5,6 +5,7 @@ const enableWebcamButton = document.getElementById('webcamButton');
 
 //  Creamos la variable que almacenará el modelo
 var model = undefined;
+var objDetected = [];
 
 //  CocoSSD es un ojeto que importamos en un script en el .html
 cocoSsd.load()
@@ -73,6 +74,17 @@ function predictWebcam() {
             //  Para asegurarnos la veracidad de q si es un objeto, 
             // solo utilizaremos los q tengan un 66% o + de probabilidad de ser objeto
             if (predictions[n].score > 0.66) {
+                //Comprobamos si ese obj no está ya en la lista para añadirlo
+                if (!objDetected.includes(predictions[n].class)) {
+                    objDetected.push(predictions[n].class);
+                    console.log('OBJETOS DETECTADOS: ', objDetected);
+
+                    const listObj = document.getElementById("list-detected-objects");
+                    const li = document.createElement('li');
+                    li.textContent = `${predictions[n].class} - ${Math.round(predictions[n].score * 100)} % de probabilidad`;
+                    listObj.appendChild(li);
+                }
+
                 //  Creamos una etiqueta p y el % de probabilidad de q sea X objeto segun el modelo
                 const p = document.createElement('p');
                 p.innerText = predictions[n].class + ' - ' +

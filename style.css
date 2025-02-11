@@ -69,7 +69,7 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family:'Audiowide', Courier, monospace;
-    
+
     &:hover {
         background-color: #0f2514;
         color: #80ce87;
@@ -112,4 +112,31 @@ header, footer {
 
 .classifyOnClick img {
     width: 100%;
+}
+
+.detected-objects {
+    padding: 20px;
+    margin: 0 auto;
+    border: 1px solid black;
+    max-width: 610px;
+
+    h3 {
+        color: #22b455;
+        font-family:'Audiowide', Courier, monospace;
+        ;
+    }
+
+    ol {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin-left: 15px;
+
+        &::marker {
+            color: #22b455;
+            font-family:'Audiowide', Courier, monospace;
+        }
+    }
 }
