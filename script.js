@@ -64,6 +64,9 @@ function predictWebcam() {
         }
         children.splice(0); //  Elimina todos los children del array
 
+        // Obtener tamaño y posición reales del video en la pantalla
+        const videoRect = video.getBoundingClientRect();
+
         //  Con el bucle recorremos las predicciones y pintamos el recuadro
         //  para señalar en el liveView los objetos encontrados x el modelo
         for (let n = 0; n < predictions.length; n++) {
@@ -72,21 +75,27 @@ function predictWebcam() {
             if (predictions[n].score > 0.66) {
                 //  Creamos una etiqueta p y el % de probabilidad de q sea X objeto segun el modelo
                 const p = document.createElement('p');
-                p.innerText = predictions[n].class + '- con ' +
-                Math.round(parseFloat(predictions[n].score) * 100) +
-                '% de probabilidad';
+                p.innerText = predictions[n].class + ' - ' +
+                    Math.round(predictions[n].score * 100) + '% de probabilidad';
 
-                //  Asignamos los estilos para colocar el recuadro en la posición correcta
-                p.style = 'margin-left: ' + predictions[n].bbox[0] + 'px; margin-top: ' +
-                (predictions[n].bbox[1] - 10) + 'px; width: ' + 
-                (predictions[n].bbox[2] - 10) + 'px; top: 0; left: 0;';
+                // Ajustar posición relativa al video
+                p.style = `
+                    position: absolute;
+                    left: ${videoRect.left + predictions[n].bbox[0]}px;
+                    top: ${predictions[n].bbox[1] - 40}px; 
+                    width: ${predictions[n].bbox[2]}px;
+                `;
 
                 //  Creamos un div para pintar el recuadro con la info y posición q ya tenemos
                 const highlighter = document.createElement('div');
-                highlighter.setAttribute('class', 'highlighter');
-                highlighter.style = 'left: ' + predictions[n].bbox[0] + 'px; top: ' +
-                predictions[n].bbox[1] + 'px; width: ' + predictions[n].bbox[2] + 
-                'px; height: ' + predictions[n].bbox[3] + 'px;';
+                highlighter.classList.add('highlighter');
+                highlighter.style = `
+                    position: absolute;
+                    left: ${videoRect.left + predictions[n].bbox[0]}px;
+                    top: ${predictions[n].bbox[1] - 30}px;
+                    width: ${predictions[n].bbox[2] + 8}px;
+                    height: ${predictions[n].bbox[3]}px;
+                `;
 
                 //  los añadimos a la vista
                 liveView.appendChild(highlighter);

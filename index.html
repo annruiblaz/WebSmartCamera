@@ -12,16 +12,18 @@
         </h1>
 
         <p>💡 Espera a que el modelo se cargue antes de hacer clic en el botón para activar la cámara.
-            Una vez activada, te verás en pantalla.</p>
+            Una vez activada, te verás en pantalla.
+        </p>
         
-        <section id="demos" class="invisible">
-
         <p>
             📷 Acerca algunos objetos a tu cámara para que el modelo los clasifique en tiempo real. Cuando estés listo, haz clic en "Activar cámara" y dale permiso al navegador cuando te lo pida (fíjate en la esquina superior izquierda de la ventana).
         </p>
+        <section id="demos" class="invisible">
+
+        
+        <button id="webcamButton">Activar Webcam</button>
         
         <div id="liveView" class="camView">
-            <button id="webcamButton">Activar Webcam</button>
             <video id="webcam" autoplay muted width="640" height="480"></video>
         </div>
         </section>
